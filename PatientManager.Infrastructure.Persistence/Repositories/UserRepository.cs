@@ -1,5 +1,7 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using PatientManager.Core.Application.Interfaces.Repository;
+using PatientManager.Core.Application.ViewModels.User;
 using PatientManager.Core.Domain.Entities;
 using PatientManager.Infrastructure.Persistence.Contexts;
 
@@ -14,5 +16,11 @@ namespace PatientManager.Infrastructure.Persistence.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task<User> LoginAsync(LoginViewModel loginVm)
+        {
+            User user = await _dbContext.Set<User>().FirstOrDefaultAsync(user => user.Username == loginVm.Username && user.Password == loginVm.Password);
+
+            return user;
+        }
     }
 }

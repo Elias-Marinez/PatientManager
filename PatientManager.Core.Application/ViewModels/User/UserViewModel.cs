@@ -1,6 +1,4 @@
 ﻿
-using System.ComponentModel.DataAnnotations;
-
 namespace PatientManager.Core.Application.ViewModels.User
 {
     public class UserViewModel
