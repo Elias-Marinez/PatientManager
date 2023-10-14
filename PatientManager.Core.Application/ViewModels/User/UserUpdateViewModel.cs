@@ -25,12 +25,12 @@ namespace PatientManager.Core.Application.ViewModels.User
         public required string Username { get; set; }
 
         [Required(ErrorMessage = "Debe colocar una contraseña")]
-        [DataType(DataType.Password)]
+        [DataType(DataType.Text)]
         public required string Password { get; set; }
 
         [Compare(nameof(Password), ErrorMessage = "Las contraseñas no coiciden")]
         [Required(ErrorMessage = "Debe colocar una contraseña")]
-        [DataType(DataType.Password)]
+        [DataType(DataType.Text)]
         public required string ConfirmPassword { get; set; }
 
         [DataType(DataType.Text)]

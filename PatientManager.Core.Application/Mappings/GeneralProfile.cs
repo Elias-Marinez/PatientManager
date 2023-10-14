@@ -21,10 +21,13 @@ namespace PatientManager.Core.Application.Mappings
                 .ForMember(x => x.UserId, opt => opt.Ignore());
 
             CreateMap<User, UserUpdateViewModel>()
-                .ForMember(x => x.ConfirmPassword, opt => opt.Ignore());
+                .ForMember(dest => dest.ConfirmPassword, opt => opt.MapFrom(src => src.Password))
+                .ReverseMap();
 
-            CreateMap<User, UserViewModel>();
+            CreateMap<User, UserViewModel>()
+                .ReverseMap();
             #endregion
+
 
             #region Doctor
             CreateMap<Doctor, DoctorSaveViewModel>()
@@ -38,7 +41,8 @@ namespace PatientManager.Core.Application.Mappings
                 .ReverseMap()
                 .ForMember(x => x.Appointments, opt => opt.Ignore());
 
-            CreateMap<Doctor, DoctorViewModel>();
+            CreateMap<Doctor, DoctorViewModel>()
+                .ReverseMap();
             #endregion
 
             #region Patient
@@ -53,7 +57,8 @@ namespace PatientManager.Core.Application.Mappings
                 .ReverseMap()
                 .ForMember(x => x.Appointments, opt => opt.Ignore());
 
-            CreateMap<Patient, PatientViewModel>();
+            CreateMap<Patient, PatientViewModel>()
+                .ReverseMap();
             #endregion
 
             #region Appointments
@@ -70,7 +75,8 @@ namespace PatientManager.Core.Application.Mappings
                 .ForMember(x => x.Patient, opt => opt.Ignore())
                 .ForMember(x => x.LabReports, opt => opt.Ignore());
 
-            CreateMap<Appointment, AppointmentViewModel>();
+            CreateMap<Appointment, AppointmentViewModel>()
+                .ReverseMap();
             #endregion
 
             #region LabTest
@@ -83,7 +89,8 @@ namespace PatientManager.Core.Application.Mappings
                 .ReverseMap()
                 .ForMember(x => x.LabReports, opt => opt.Ignore());
 
-            CreateMap<LabTest, LabTestViewModel>();
+            CreateMap<LabTest, LabTestViewModel>()
+                .ReverseMap();
             #endregion
 
             #region LabReport
@@ -99,7 +106,8 @@ namespace PatientManager.Core.Application.Mappings
                 .ForMember(x => x.Appointment, opt => opt.Ignore())
                 .ForMember(x => x.LabTest, opt => opt.Ignore());
 
-            CreateMap<LabReport, LabReportViewModel>();
+            CreateMap<LabReport, LabReportViewModel>()
+                .ReverseMap();
             #endregion
 
         }

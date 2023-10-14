@@ -1,0 +1,48 @@
+﻿@model PatientManager.Core.Application.ViewModels.User.UserUpdateViewModel
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h1>Usuarios</h1>
+<div class="row">
+    <hr />
+    <h3>¿Está seguro que desea eliminar este usuario?</h3>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.UserId)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.UserId)
+                </dd>
+                <dt class="col-sm-4">
+                    Nombre Completo
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.LastName)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Username)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Username)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.UserType)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.UserType)
+                </dd>
+            </dl>
+            <div class="row">
+                <form asp-action="Delete">
+                    <input type="submit" value="Aceptar" class="btn btn-danger col-5 mx-auto" />
+                    <a asp-action="Index" class="btn btn-primary col-5 mx-auto">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

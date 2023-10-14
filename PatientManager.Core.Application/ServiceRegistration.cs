@@ -1,5 +1,7 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
+using PatientManager.Core.Application.Helpers;
+using PatientManager.Core.Application.Interfaces.Helpers;
 using PatientManager.Core.Application.Interfaces.Services;
 using PatientManager.Core.Application.Services;
 using System.Reflection;
@@ -22,6 +24,10 @@ namespace PatientManager.Core.Application
             services.AddTransient<ILabReportService, LabReportService>();
             services.AddTransient<ILabTestService,  LabTestService>();
             services.AddTransient<IUserService,  UserService>();
+            #endregion
+
+            #region Helpers
+            services.AddTransient<IFileManager, FileManager>();
             #endregion
         }
     }

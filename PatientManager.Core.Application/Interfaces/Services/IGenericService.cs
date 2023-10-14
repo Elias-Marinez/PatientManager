@@ -11,7 +11,7 @@ namespace PatientManager.Core.Application.Interfaces.Services
         Task Update(UpdateViewModel vm, int id);
         Task Delete(int id);
         Task<List<ViewModel>> Get();
-        Task<ViewModel> GetById(int id);
+        Task<UpdateViewModel> GetById(int id);
         Task<List<ViewModel>> GetWithAll();
     }
 }

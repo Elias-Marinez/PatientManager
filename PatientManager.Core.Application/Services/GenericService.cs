@@ -14,8 +14,6 @@ namespace PatientManager.Core.Application.Services
     {
         private readonly IGenericRepository<Entity> _repository;
         private readonly IMapper _mapper;
-        private ILabReportRepository repository;
-        private IMapper mapper;
 
         public GenericService(IGenericRepository<Entity> repository, IMapper mapper)
         {
@@ -47,18 +45,18 @@ namespace PatientManager.Core.Application.Services
             return result;
         }
 
-        public async Task<ViewModel> GetById(int id)
-        {
-            var entity = await _repository.GetByIdAsync(id);
-            ViewModel result = _mapper.Map<ViewModel>(entity);
-
-            return result;
-        }
-
         public async Task<List<ViewModel>> GetWithAll()
         {
             var entities = await _repository.GetAllWithIncludeAsync();
             List<ViewModel> result = _mapper.Map<List<ViewModel>>(entities);
+
+            return result;
+        }
+
+        public async Task<UpdateViewModel> GetById(int id)
+        {
+            var entity = await _repository.GetByIdAsync(id);
+            UpdateViewModel result = _mapper.Map<UpdateViewModel>(entity);
 
             return result;
         }

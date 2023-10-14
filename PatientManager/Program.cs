@@ -1,11 +1,14 @@
 using PatientManager.Infrastructure.Persistence;
+using PatientManager.Core.Application;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddPersistenceInfrastructure(builder.Configuration);
 
+builder.Services.AddPersistenceInfrastructure(builder.Configuration);
+builder.Services.AddApplicationLayer();
 
 var app = builder.Build();
 

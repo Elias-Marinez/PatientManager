@@ -8,6 +8,10 @@
 
   <ItemGroup>
     <Folder Include="Middlewares\" />
+    <Folder Include="Views\Appointment\" />
+    <Folder Include="Views\LabTest\" />
+    <Folder Include="Views\LabReport\" />
+    <Folder Include="Views\Patient\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,9 +19,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.9" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PatientManager.Core.Application\PatientManager.Core.Application.csproj" />
     <ProjectReference Include="..\PatientManager.Infrastructure.Persistence\PatientManager.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 

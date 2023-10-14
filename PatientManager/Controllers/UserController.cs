@@ -1,11 +1,19 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PatientManager.Core.Application.Interfaces.Services;
 using PatientManager.Core.Application.ViewModels.User;
 
 namespace PatientManager.Controllers
 {
     public class UserController : Controller
     {
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         // GET: UserController
         public ActionResult Login()
         {
@@ -21,30 +29,23 @@ namespace PatientManager.Controllers
 
 
         // GET: UserController
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
+        {
+            return View(await _userService.Get());
+        }
+
+        public ActionResult Register()
         {
             return View();
         }
 
-        // GET: UserController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: UserController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Register(UserSaveViewModel vm)
         {
             try
             {
+                await _userService.Add(vm);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -54,18 +55,19 @@ namespace PatientManager.Controllers
         }
 
         // GET: UserController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            return View(await _userService.GetById(id));
         }
 
         // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, UserUpdateViewModel vm)
         {
             try
             {
+                await _userService.Update(vm, id);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -75,18 +77,19 @@ namespace PatientManager.Controllers
         }
 
         // GET: UserController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            return View(await _userService.GetById(id));
         }
 
         // POST: UserController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, UserUpdateViewModel vm)
         {
             try
             {
+                await _userService.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
