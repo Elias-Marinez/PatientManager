@@ -1,0 +1,59 @@
+﻿@model PatientManager.Core.Application.ViewModels.Appointment.AppointmentViewModel
+
+@{
+    ViewData["Title"] = "Appointments";
+}
+
+<div class="d-flex justify-content-between bottom-line">
+    <div>
+        <h1 class="d-inline">Resultados de Laboratorio</h1>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+        @if (Model == null)
+        {
+            <h3 class="fw-light">No existen pruebas para esta cita</h3>
+        }
+        else
+        {
+            <div class="text-center">
+                <form asp-action="Check">
+                    <input type="hidden" asp-for="AppointmentId" class="form-control">
+                    <input type="submit" value="Completar" asp-route-id="@Model.AppointmentId" class="btn btn-outline-success col-5 mx-auto">
+                    <a asp-action="Index" class="btn btn-outline-info col-5 mx-auto">
+                        Cerrar
+                    </a>
+                </form>
+            </div>
+            <hr />
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th>
+                            Nombre de la prueba
+                        </th>
+                        <th>
+                            Estado
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.LabReports)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.LabTest.Name)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

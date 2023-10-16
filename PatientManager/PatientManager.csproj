@@ -8,10 +8,8 @@
 
   <ItemGroup>
     <Folder Include="Middlewares\" />
-    <Folder Include="Views\Appointment\" />
-    <Folder Include="Views\LabTest\" />
-    <Folder Include="Views\LabReport\" />
-    <Folder Include="Views\Patient\" />
+    <Folder Include="wwwroot\images\doctors\" />
+    <Folder Include="wwwroot\images\patients\" />
   </ItemGroup>
 
   <ItemGroup>

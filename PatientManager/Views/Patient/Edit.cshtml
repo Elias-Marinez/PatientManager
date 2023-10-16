@@ -1,12 +1,12 @@
-﻿@model PatientManager.Core.Application.ViewModels.Doctor.DoctorUpdateViewModel
+﻿@model PatientManager.Core.Application.ViewModels.Patient.PatientUpdateViewModel
 
 @{
-    ViewData["Title"] = "Doctors";
+    ViewData["Title"] = "Patients";
 }
 
 <div class="d-flex justify-content-between bottom-line">
     <div>
-        <h1 class="d-inline">Medicos</h1>
+        <h1 class="d-inline">Pacientes</h1>
     </div>
     <div>
         <h5 class="fw-ligther m-3">Editando: @Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.LastName)</h5>
@@ -20,35 +20,52 @@
             <form asp-action="Edit" enctype="multipart/form-data">
                 <div class="card-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="DoctorId" class="form-control" />
+
+                    <input type="hidden" asp-for="PatientId" class="form-control" />
                     <input type="hidden" asp-for="ImageUrl" class="form-control" />
+
                     <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
+                        <label asp-for="Name" class="control-label">Nombre</label>
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="LastName" class="control-label"></label>
+                        <label asp-for="LastName" class="control-label">Apellido</label>
                         <input asp-for="LastName" class="form-control" />
                         <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Phone" class="control-label"></label>
+                        <label asp-for="Phone" class="control-label">Celular</label>
                         <input asp-for="Phone" class="form-control" />
                         <span asp-validation-for="Phone" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="PersonalID" class="control-label"></label>
+                        <label asp-for="Address" class="control-label">Direccion</label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PersonalID" class="control-label">Cedula</label>
                         <input asp-for="PersonalID" class="form-control" />
                         <span asp-validation-for="PersonalID" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Image" class="control-label"></label>
+                        <label asp-for="Birtday" class="control-label">Fecha de nacimiento</label>
+                        <input asp-for="Birtday" asp-format="{0:yyyy-MM-dd}" type="date" class="form-control" />
+                        <span asp-validation-for="Birtday" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check mt-1">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Allergies" /> Alergias
+                        </label>
+                    </div>
+                    <div class="form-group form-check mt-1">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Smoker" /> Fuma
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Image" class="control-label"> Imagen</label>
                         <input type="file" asp-for="Image" class="form-control" />
                         <span asp-validation-for="Image" class="text-danger"></span>
                     </div>
@@ -64,11 +81,7 @@
     </div>
     <div class="col-md-4">
         <div class="card mt-5">
-            <img src="/images/doctors/@Model.ImageUrl" class="card-img" alt="@Model.Name">
+            <img src="/images/patients/@Model.ImageUrl" class="card-img" alt="@Model.Name">
         </div>
     </div>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

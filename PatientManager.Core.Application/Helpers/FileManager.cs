@@ -10,7 +10,7 @@ namespace PatientManager.Core.Application.Helpers
         private string root = "wwwroot/images/";
         public async Task<string> Save(IFormFile archive, string file)
         {
-            this.root = root + file;
+            var saveroot = root + file;
 
             if (archive == null || archive.Length == 0)
             {
@@ -19,7 +19,7 @@ namespace PatientManager.Core.Application.Helpers
 
             var name = Guid.NewGuid().ToString() + Path.GetExtension(archive.FileName);
 
-            var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), this.root);
+            var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), saveroot);
 
             if (!Directory.Exists(directoryPath))
             {
@@ -43,7 +43,8 @@ namespace PatientManager.Core.Application.Helpers
 
         public void Delete(string file, string imageUrl)
         {
-            var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), this.root);
+            var deleteRoot = root + file;
+            var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), deleteRoot);
             var fileRoot = Path.Combine(directoryPath, imageUrl);
 
             if (File.Exists(fileRoot))

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using PatientManager.Core.Application.Interfaces.Services;
 using PatientManager.Core.Application.ViewModels.User;

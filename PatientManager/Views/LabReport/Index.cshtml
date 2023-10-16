@@ -1,0 +1,47 @@
+﻿@model IEnumerable<PatientManager.Core.Application.ViewModels.LabReport.LabReportViewModel>
+
+@{
+    ViewData["Title"] = "LabReports";
+}
+<div class="d-flex justify-content-between bottom-line">
+    <div>
+        <h1 class="d-inline">Reportes de Laboratorio</h1>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-11 mx-auto" >
+        @if (Model.Where(x => x.Status == "Pendiente") == null || Model.Where(x => x.Status == "Pendiente").Count() == 0)
+        {
+            <h3 class="fw-light">No existen pruebas pendientes</h3>
+        }
+        else
+        {
+            <table class="table">
+                <!-- Encabezado de la tabla -->
+                <thead class="table-dark">
+                    <tr>
+                        <th>Paciente</th>
+                        <th>Cedula</th>
+                        <th>Prueba a realizar</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Where(x => x.Status == "Pendiente"))
+                    {
+                        <tr>
+                            <!-- Datos de la cita para "Consulta" -->
+                            <td>@Html.DisplayFor(modelItem => item.Appointment.Patient.Name) @Html.DisplayFor(modelItem => item.Appointment.Patient.LastName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Appointment.Patient.PersonalID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.LabTest.Name)</td>
+                            <td class="text-center col-4">
+                                <a asp-action="Report" asp-route-id="@item.LabReportId" class="btn btn-outline-primary col-6 mx-auto">Reportar Resultados</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+       }
+    </div>
+</div>

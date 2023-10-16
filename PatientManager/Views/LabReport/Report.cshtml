@@ -1,0 +1,44 @@
+﻿@model PatientManager.Core.Application.ViewModels.LabReport.LabReportUpdateViewModel
+
+@{
+    ViewData["Title"] = "LabReport";
+}
+<div class="d-flex justify-content-between bottom-line">
+    <div>
+        <h1 class="d-inline">Reportes de Laboratorio</h1>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-3">
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <form asp-action="Report">
+                <div class="card-header">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="LabReportId" type="hidden" class="form-control" />
+                    <input asp-for="AppointmentId" type="hidden" class="form-control" />
+                    <input asp-for="LabTestId" type="hidden" class="form-control" />
+                    <input asp-for="Status" type="hidden" value="Finalizada" class="form-control" />
+                    <div class="form-group text-center">
+                       Area de Registro
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="Results" class="control-label">Resultados</label>
+                        <textarea asp-for="Results" class="form-control"></textarea>
+                        <span asp-validation-for="Results" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="form-group mt-2 text-center">
+                        <input type="submit" value="Finalizar" class="btn btn-block btn-success col-6 mx-auto" />
+                        <a asp-action="Index" class="btn btn-block btn-primary col-5 mx-auto">Regresar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

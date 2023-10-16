@@ -1,20 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
+using PatientManager.Core.Application.Interfaces.Services;
+using PatientManager.Core.Application.ViewModels.LabTest;
 
 namespace PatientManager.Controllers
 {
     public class LabTestController : Controller
     {
-        // GET: LabTestController
-        public ActionResult Index()
+        private readonly ILabTestService _labTestService;
+
+        public LabTestController(ILabTestService labTestService)
         {
-            return View();
+            _labTestService = labTestService;
         }
 
-        // GET: LabTestController/Details/5
-        public ActionResult Details(int id)
+        // GET: LabTestController
+        public async Task<ActionResult> Index()
         {
-            return View();
+            return View(await _labTestService.Get());
         }
 
         // GET: LabTestController/Create
@@ -26,10 +29,11 @@ namespace PatientManager.Controllers
         // POST: LabTestController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(LabTestSaveViewModel vm)
         {
             try
             {
+                await _labTestService.Add(vm);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -39,18 +43,19 @@ namespace PatientManager.Controllers
         }
 
         // GET: LabTestController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            return View(await _labTestService.GetById(id));
         }
 
         // POST: LabTestController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, LabTestUpdateViewModel vm)
         {
             try
             {
+                await _labTestService.Update(vm, id);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -60,18 +65,19 @@ namespace PatientManager.Controllers
         }
 
         // GET: LabTestController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            return View(await _labTestService.GetById(id));
         }
 
         // POST: LabTestController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, LabTestUpdateViewModel vm)
         {
             try
             {
+                await _labTestService.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

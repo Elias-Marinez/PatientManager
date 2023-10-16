@@ -1,0 +1,44 @@
+﻿@model PatientManager.Core.Application.ViewModels.Appointment.AppointmentConsultViewModel
+
+@{
+    ViewData["Title"] = "Appointments";
+}
+<div class="d-flex justify-content-between bottom-line">
+    <div>
+        <h1 class="d-inline">Citas</h1>
+    </div>
+    <div>
+        <h5 class="fw-ligther m-3">Consultando....</h5>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-4">
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <form asp-action="Consult">
+                <div class="card-header">
+                    <div class="form-group text-center">
+                        <span>Area de registro</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="AppointmentId" type="hidden" class="form-control" />
+                    <div class="form-group">
+                        <label asp-for="SelectedLabTest" class="control-label">Seleccionar las pruebas de laboratorio a realizar</label>
+                        <select asp-for="SelectedLabTest" asp-items="@(new SelectList(Model.LabTests, "LabTestId", "Name"))" class="form-control" required></select>
+                        <span asp-validation-for="SelectedLabTest" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="form-group mt-2 text-center">
+                        <input type="submit" value="Guardar" class="btn btn-block btn-success col-5 mx-auto" />
+                        <a asp-action="Index" class="btn btn-block btn-outline-primary col-5 mx-auto">Regresar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

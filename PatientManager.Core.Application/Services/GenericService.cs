@@ -21,23 +21,23 @@ namespace PatientManager.Core.Application.Services
             _mapper = mapper;
         }
 
-        public async Task Add(SaveViewModel vm)
+        public virtual async Task Add(SaveViewModel vm)
         {
             Entity entity = _mapper.Map<Entity>(vm);
             await _repository.AddAsync(entity);
         }
-        public async Task Update(UpdateViewModel vm, int id)
+        public virtual async Task Update(UpdateViewModel vm, int id)
         {
             Entity entity = _mapper.Map<Entity>(vm);
             await _repository.UpdateAsync(entity, id);
         }
 
-        public async Task Delete(int id)
+        public virtual async Task Delete(int id)
         {
             await _repository.DeleteAsync(id);
         }
 
-        public async Task<List<ViewModel>> Get()
+        public virtual async Task<List<ViewModel>> Get()
         {
             var entities = await _repository.GetAllAsync();
             List<ViewModel> result = _mapper.Map<List<ViewModel>>(entities);
@@ -45,7 +45,7 @@ namespace PatientManager.Core.Application.Services
             return result;
         }
 
-        public async Task<List<ViewModel>> GetWithAll()
+        public virtual async Task<List<ViewModel>> GetWithAll()
         {
             var entities = await _repository.GetAllWithIncludeAsync();
             List<ViewModel> result = _mapper.Map<List<ViewModel>>(entities);
@@ -53,7 +53,7 @@ namespace PatientManager.Core.Application.Services
             return result;
         }
 
-        public async Task<UpdateViewModel> GetById(int id)
+        public virtual async Task<UpdateViewModel> GetById(int id)
         {
             var entity = await _repository.GetByIdAsync(id);
             UpdateViewModel result = _mapper.Map<UpdateViewModel>(entity);

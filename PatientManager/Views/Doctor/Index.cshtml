@@ -32,13 +32,13 @@
                                         @Html.DisplayFor(modelItem => item.Name) @Html.DisplayFor(modelItem => item.LastName)
                                     </h5>
                                 <div class="text-center mb-2">
-                                    @Html.DisplayFor(modelItem => item.PersonalID)
+                                    <b>@Html.DisplayFor(modelItem => item.PersonalID)</b>
                                 </div>
                                 <div class="mb-2">
-                                    - @Html.DisplayFor(modelItem => item.Email)
+                                    <b>Correo: </b>@Html.DisplayFor(modelItem => item.Email)
                                 </div>
-                                <div class="mb-3">
-                                    - @Html.DisplayFor(modelItem => item.Phone)
+                                <div class="mb-4">
+                                    <b>Celular: </b>@Html.DisplayFor(modelItem => item.Phone)
                                 </div>
                                 <div class="mb-2 mt-auto text-center">
                                     <a asp-action="Edit" asp-route-id="@item.DoctorId" class="btn btn-outline-warning col-5 mx-auto">

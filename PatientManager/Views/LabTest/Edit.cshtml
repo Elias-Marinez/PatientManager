@@ -1,0 +1,49 @@
+﻿@model PatientManager.Core.Application.ViewModels.LabTest.LabTestUpdateViewModel
+
+@{
+    ViewData["Title"] = "LabTest";
+}
+
+<div class="d-flex justify-content-between bottom-line">
+    <div>
+        <h1 class="d-inline">Pruebas de Laboratorio</h1>
+    </div>
+    <div>
+        <h5 class="fw-ligther m-3">Editando: @Html.DisplayFor(model => model.Name)</h5>
+    </div>
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-4">
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <form asp-action="Edit">
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="LabTestId" class="control-label">Id</label>
+                        <input asp-for="LabTestId" class="form-control" readonly />
+                        <span asp-validation-for="LabTestId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label">Nombre</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="form-group mt-2 text-center">
+                        <input type="submit" value="Guardar" class="btn btn-block btn-success col-6 mx-auto" />
+                        <a asp-action="Index" class="btn btn-block btn-primary col-5 mx-auto">Regresar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

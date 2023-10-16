@@ -60,7 +60,7 @@ namespace PatientManager.Controllers
             try
             {
                 if(vm.Image != null)
-                    vm.ImageUrl = await _fileManager.Save(vm.Image, "doctors");
+                    vm.ImageUrl = await _fileManager.Update(vm.Image, "doctors", vm.ImageUrl);
 
                 await _doctorService.Update(vm, id);
                 return RedirectToAction(nameof(Index));

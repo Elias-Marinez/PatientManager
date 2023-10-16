@@ -1,28 +1,28 @@
-﻿@model PatientManager.Core.Application.ViewModels.Doctor.DoctorUpdateViewModel
+﻿@model PatientManager.Core.Application.ViewModels.Appointment.AppointmentViewModel
 
 @{
-    ViewData["Title"] = "Doctors";
+    ViewData["Title"] = "Appointments";
 }
+<h1>Citas</h1>
 
-<h1>Medicos</h1>
 <div class="row">
     <hr />
-    <h3>¿Está seguro que desea eliminar este medico?</h3>
+    <h3>¿Está seguro que desea eliminar esta cita?</h3>
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6">
-            <dl class="row mt-3">
+            <dl class="row mt-4">
                 <dt class="col-sm-4">
-                    Nombre Completo
+                    Paciente
                 </dt>
                 <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.LastName)
+                    @Html.DisplayFor(model => model.Patient.Name) @Html.DisplayFor(model => model.Patient.LastName)
                 </dd>
                 <dt class="col-sm-4">
-                    Cedula
+                    Fecha
                 </dt>
                 <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.PersonalID)
+                    @Html.DisplayFor(model => model.Date)
                 </dd>
             </dl>
             <div class="row">

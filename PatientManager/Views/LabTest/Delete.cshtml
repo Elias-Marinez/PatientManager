@@ -1,0 +1,23 @@
+﻿@model PatientManager.Core.Application.ViewModels.LabTest.LabTestUpdateViewModel
+
+@{
+    ViewData["Title"] = "LabTest";
+}
+
+<h1>Pruebas de Laboratorio</h1>
+<div class="row">
+    <hr />
+    <h3>¿Está seguro que desea eliminar esta prueba?</h3>
+    <dl class="row md-2 mt-3">
+        <dt class="col-sm-2">
+            Nombre
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+    <form asp-action="Delete">
+        <input type="submit" value="Aceptar" class="btn btn-danger col-2 mx-auto" />
+        <a asp-action="Index" class="btn btn-primary col-2 mx-auto">Cancelar</a>
+    </form>
+</div>

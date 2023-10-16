@@ -9,6 +9,7 @@ namespace PatientManager.Core.Application.Interfaces.Services
                                                            AppointmentUpdateViewModel,
                                                            Appointment>
     {
-
+        Task StatusUpdate(int id, int state);
+        Task<AppointmentViewModel> GetByIdWithAll(int id);
     }
 }

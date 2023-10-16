@@ -1,4 +1,5 @@
 ﻿
+using PatientManager.Core.Application.ViewModels.Appointment;
 using PatientManager.Core.Application.ViewModels.LabReport;
 using PatientManager.Core.Domain.Entities;
 
@@ -9,6 +10,6 @@ namespace PatientManager.Core.Application.Interfaces.Services
                                                          LabReportUpdateViewModel,
                                                          LabReport>
     {
-
+        Task AddByAppointment(AppointmentConsultViewModel vm);
     }
 }
