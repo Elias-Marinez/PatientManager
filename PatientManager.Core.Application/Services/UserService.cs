@@ -18,5 +18,15 @@ namespace PatientManager.Core.Application.Services
             _mapper = mapper;
         }
 
+        public async Task<UserViewModel> Login(LoginViewModel vm)
+        {
+            User user = await _repository.LoginAsync(vm);
+
+            if (user == null)
+                return null;
+
+            UserViewModel loginVm = _mapper.Map<UserViewModel>(user);
+            return loginVm;
+        }
     }
 }

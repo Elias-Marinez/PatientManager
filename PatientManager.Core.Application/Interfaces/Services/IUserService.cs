@@ -9,6 +9,6 @@ namespace PatientManager.Core.Application.Interfaces.Services
                                                     UserUpdateViewModel,
                                                     User>
     {
-
+        Task<UserViewModel> Login(LoginViewModel vm);
     }
 }

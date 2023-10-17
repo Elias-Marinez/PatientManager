@@ -1,7 +1,9 @@
 ﻿
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PatientManager.Core.Application.Interfaces.Services;
 using PatientManager.Core.Application.ViewModels.User;
+using PatientManager.Core.Application.Helpers;
 
 namespace PatientManager.Controllers
 {
@@ -22,11 +24,34 @@ namespace PatientManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel vm)
+        public async Task<ActionResult> Login(LoginViewModel vm)
         {
-            return View();
-        }
+            try
+            {
+                UserViewModel userVm = await _userService.Login(vm);
 
+                if (userVm != null)
+                {
+                    HttpContext.Session.Set<UserViewModel>("user", userVm);
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
+                }
+                else
+                {
+                    ModelState.AddModelError("LoginValidation", "Nombre de usuario o Contraseña incorrectos");
+                }
+
+                return View(vm);
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Remove("user");
+            return RedirectToRoute(new { controller = "User", action = "Login" });
+        }
 
         // GET: UserController
         public async Task<ActionResult> Index()
