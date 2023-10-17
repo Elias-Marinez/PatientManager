@@ -1,6 +1,6 @@
 using PatientManager.Infrastructure.Persistence;
 using PatientManager.Core.Application;
-
+using PatientManager.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +12,7 @@ builder.Services.AddPersistenceInfrastructure(builder.Configuration);
 builder.Services.AddApplicationLayer();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddTransient<ValidateUserSession, ValidateUserSession>();
 
 var app = builder.Build();
 

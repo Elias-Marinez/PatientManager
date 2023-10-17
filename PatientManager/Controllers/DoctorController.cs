@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PatientManager.Core.Application.Interfaces.Helpers;
 using PatientManager.Core.Application.Interfaces.Services;
 using PatientManager.Core.Application.ViewModels.Doctor;
+using PatientManager.Middlewares;
 
 namespace PatientManager.Controllers
 {
@@ -10,22 +11,30 @@ namespace PatientManager.Controllers
     {
         private readonly IDoctorService _doctorService;
         private readonly IFileManager _fileManager;
+        private readonly ValidateUserSession _validator;
 
-        public DoctorController(IDoctorService doctorService, IFileManager fileManager)
+        public DoctorController(IDoctorService doctorService, IFileManager fileManager, ValidateUserSession validator)
         {
             _doctorService = doctorService;
             _fileManager = fileManager;
+            _validator = validator;
         }
 
         // GET: DoctorController
         public async Task<ActionResult> Index()
         {
+            if (!_validator.isAdmin())
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
             return View(await _doctorService.Get());
         }
 
         // GET: DoctorController/Create
         public ActionResult Create()
         {
+            if (!_validator.isAdmin())
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
             return View();
         }
 
@@ -34,6 +43,9 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(DoctorSaveViewModel vm)
         {
+            if (!_validator.isAdmin())
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
             try
             {
                 vm.ImageUrl = await _fileManager.Save(vm.Image, "doctors");
@@ -49,6 +61,9 @@ namespace PatientManager.Controllers
         // GET: DoctorController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
+            if (!_validator.isAdmin())
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
             return View(await _doctorService.GetById(id));
         }
 
@@ -57,6 +72,9 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, DoctorUpdateViewModel vm)
         {
+            if (!_validator.isAdmin())
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
             try
             {
                 if(vm.Image != null)
@@ -74,6 +92,9 @@ namespace PatientManager.Controllers
         // GET: DoctorController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
+            if (!_validator.isAdmin())
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
             return View(await _doctorService.GetById(id));
         }
 
@@ -81,7 +102,10 @@ namespace PatientManager.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id, DoctorUpdateViewModel vm)
-        { 
+        {
+            if (!_validator.isAdmin())
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
             try
             {
                 vm = await _doctorService.GetById(id);

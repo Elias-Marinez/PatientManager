@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using PatientManager.Core.Application.Interfaces.Helpers;
 using PatientManager.Core.Application.Interfaces.Services;
-using PatientManager.Core.Application.Services;
 using PatientManager.Core.Application.ViewModels.Patient;
+using PatientManager.Middlewares;
 
 namespace PatientManager.Controllers
 {
@@ -11,22 +11,30 @@ namespace PatientManager.Controllers
     {
         private readonly IPatientService _patientService;
         private readonly IFileManager _fileManager;
+        private readonly ValidateUserSession _validator;
 
-        public PatientController(IPatientService patientService, IFileManager fileManager)
+        public PatientController(IPatientService patientService, IFileManager fileManager, ValidateUserSession validator)
         {
             _patientService = patientService;
             _fileManager = fileManager;
+            _validator = validator;
         }
 
         // GET: PatientController
         public async Task<ActionResult> Index()
         {
+            if (!_validator.isAsistent())
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
             return View(await _patientService.Get());
         }
 
         // GET: PatientController/Create
         public ActionResult Create()
         {
+            if (!_validator.isAsistent())
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
             return View();
         }
 
@@ -35,6 +43,9 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(PatientSaveViewModel vm)
         {
+            if (!_validator.isAsistent())
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
             try
             {
                 vm.ImageUrl = await _fileManager.Save(vm.Image, "patients");
@@ -50,6 +61,9 @@ namespace PatientManager.Controllers
         // GET: PatientController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
+            if (!_validator.isAsistent())
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
             return View(await _patientService.GetById(id));
         }
 
@@ -58,6 +72,9 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, PatientUpdateViewModel vm)
         {
+            if (!_validator.isAsistent())
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
             try
             {
                 if (vm.Image != null)
@@ -75,6 +92,9 @@ namespace PatientManager.Controllers
         // GET: PatientController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
+            if (!_validator.isAsistent())
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
             return View(await _patientService.GetById(id));
         }
 
@@ -83,6 +103,9 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id, PatientUpdateViewModel vm)
         {
+            if (!_validator.isAsistent())
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
             try
             {
                 vm = await _patientService.GetById(id);

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PatientManager.Middlewares;
 using PatientManager.Models;
 using System.Diagnostics;
 
@@ -7,19 +8,20 @@ namespace PatientManager.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ValidateUserSession _validator;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, ValidateUserSession validator)
         {
             _logger = logger;
+            _validator = validator;
         }
 
         public IActionResult Index()
         {
-            return View();
-        }
+            if (!_validator.isLogged())
+                return RedirectToRoute(new { controller = "User", action = "Login" });
 
-        public IActionResult Privacy()
-        {
             return View();
         }
 
