@@ -1,7 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Http;
 using PatientManager.Core.Application.Interfaces.Helpers;
-using System.Xml.Linq;
 
 namespace PatientManager.Core.Application.Helpers
 {

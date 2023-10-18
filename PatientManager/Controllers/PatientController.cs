@@ -23,7 +23,7 @@ namespace PatientManager.Controllers
         // GET: PatientController
         public async Task<ActionResult> Index()
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View(await _patientService.Get());
@@ -32,7 +32,7 @@ namespace PatientManager.Controllers
         // GET: PatientController/Create
         public ActionResult Create()
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View();
@@ -43,7 +43,7 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(PatientSaveViewModel vm)
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             try
@@ -61,7 +61,7 @@ namespace PatientManager.Controllers
         // GET: PatientController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View(await _patientService.GetById(id));
@@ -72,7 +72,7 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, PatientUpdateViewModel vm)
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             try
@@ -92,7 +92,7 @@ namespace PatientManager.Controllers
         // GET: PatientController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View(await _patientService.GetById(id));
@@ -103,7 +103,7 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id, PatientUpdateViewModel vm)
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             try

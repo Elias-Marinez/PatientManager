@@ -19,7 +19,7 @@ namespace PatientManager.Controllers
 
         public IActionResult Index()
         {
-            if (!_validator.isLogged())
+            if (!_validator.IsLogged())
                 return RedirectToRoute(new { controller = "User", action = "Login" });
 
             return View();

@@ -29,7 +29,7 @@ namespace PatientManager.Controllers
 
         public async Task<IActionResult> Index()
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View(await _appointmentService.GetWithAll());
@@ -37,7 +37,7 @@ namespace PatientManager.Controllers
 
         public async Task<ActionResult> Create()
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             AppointmentSaveViewModel vm = new()
@@ -53,7 +53,7 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(AppointmentSaveViewModel vm)
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             try
@@ -69,7 +69,7 @@ namespace PatientManager.Controllers
 
         public async Task<ActionResult> Consult(int id)
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             AppointmentConsultViewModel vm = new()
@@ -84,7 +84,7 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Consult(AppointmentConsultViewModel vm)
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             try
@@ -101,7 +101,7 @@ namespace PatientManager.Controllers
         }
         public async Task<ActionResult> Check(int id)
         {
-            if(!_validator.isAsistent())
+            if(!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View(await _appointmentService.GetByIdWithAll(id));
@@ -111,7 +111,7 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Check(AppointmentViewModel vm)
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             try
@@ -126,7 +126,7 @@ namespace PatientManager.Controllers
         }
         public async Task<ActionResult> Results(int id)
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View(await _appointmentService.GetByIdWithAll(id));
@@ -134,7 +134,7 @@ namespace PatientManager.Controllers
 
         public async Task<ActionResult> Delete(int id)
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View(await _appointmentService.GetByIdWithAll(id));
@@ -146,7 +146,7 @@ namespace PatientManager.Controllers
         {
             try
             {
-                if (!_validator.isAsistent())
+                if (!_validator.IsAsistent())
                     return RedirectToRoute(new { controller = "Home", action = "Index" });
 
                 await _appointmentService.Delete(id);

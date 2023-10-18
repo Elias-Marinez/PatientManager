@@ -28,5 +28,14 @@ namespace PatientManager.Core.Application.Services
             UserViewModel loginVm = _mapper.Map<UserViewModel>(user);
             return loginVm;
         }
+        public async Task<bool> ExistsUsername(UserSaveViewModel vm)
+        {
+            return await _repository.ExistsUsername(vm.Username);
+        }
+
+        public async Task<bool> ExistsUsername(UserUpdateViewModel vm)
+        {
+            return await _repository.ExistsUsername(vm.Username, vm.UserId);
+        }
     }
 }

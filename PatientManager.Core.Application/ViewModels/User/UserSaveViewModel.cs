@@ -33,5 +33,6 @@ namespace PatientManager.Core.Application.ViewModels.User
 
         [DataType(DataType.Text)]
         public required string UserType { get; set; }
+
     }
 }

@@ -31,10 +31,18 @@ namespace PatientManager.Infrastructure.Persistence.Repositories
         {
             string passwordEncrypt = PasswordEncryptation.ComputeSha256Hash(loginVm.Password);
 
-            User user = await _dbContext.Set<User>()
+            User user = await _dbContext.Users
                 .FirstOrDefaultAsync(user => user.Username == loginVm.Username && user.Password == passwordEncrypt);
 
             return user;
+        }
+        public async Task<bool> ExistsUsername(string username)
+        {
+            return await _dbContext.Users.AnyAsync(u => u.Username == username);
+        }
+        public async Task<bool> ExistsUsername(string username, int id)
+        {
+            return await _dbContext.Users.AnyAsync(u => u.Username == username && u.UserId != id);
         }
     }
 }

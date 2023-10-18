@@ -4,6 +4,7 @@ using PatientManager.Core.Application.Interfaces.Services;
 using PatientManager.Core.Application.ViewModels.User;
 using PatientManager.Core.Application.Helpers;
 using PatientManager.Middlewares;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace PatientManager.Controllers
 {
@@ -58,7 +59,7 @@ namespace PatientManager.Controllers
         // GET: UserController
         public async Task<ActionResult> Index()
         {
-            if (!_validator.isAdmin())
+            if (!_validator.IsAdmin())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View(await _userService.Get());
@@ -66,7 +67,7 @@ namespace PatientManager.Controllers
 
         public ActionResult Register()
         {
-            if (!_validator.isAdmin())
+            if (!_validator.IsAdmin())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View();
@@ -76,8 +77,14 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(UserSaveViewModel vm)
         {
-            if (!_validator.isAdmin())
+            if (!_validator.IsAdmin())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
+
+            if (ModelState.IsValid && await _userService.ExistsUsername(vm))
+            {
+                ModelState.AddModelError("Username", "Nombre de usuario ya existe");
+                return View(vm);
+            }
 
             try
             {
@@ -93,7 +100,7 @@ namespace PatientManager.Controllers
         // GET: UserController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            if (!_validator.isAdmin())
+            if (!_validator.IsAdmin())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View(await _userService.GetById(id));
@@ -104,8 +111,14 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, UserUpdateViewModel vm)
         {
-            if (!_validator.isAdmin())
+            if (!_validator.IsAdmin())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
+
+            if (ModelState.IsValid && await _userService.ExistsUsername(vm))
+            {
+                ModelState.AddModelError("Username", "Nombre de usuario ya existe");
+                return View(vm);
+            }
 
             try
             {
@@ -121,7 +134,7 @@ namespace PatientManager.Controllers
         // GET: UserController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
-            if (!_validator.isAdmin())
+            if (!_validator.IsAdmin())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View(await _userService.GetById(id));
@@ -134,7 +147,7 @@ namespace PatientManager.Controllers
         {
             try
             {
-                if (!_validator.isAdmin())
+                if (!_validator.IsAdmin())
                     return RedirectToRoute(new { controller = "Home", action = "Index" });
 
                 await _userService.Delete(id);

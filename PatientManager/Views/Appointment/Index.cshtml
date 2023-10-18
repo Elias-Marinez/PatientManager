@@ -44,10 +44,10 @@
                                 <!-- Datos de la cita para "Consulta" -->
                                 <td>@Html.DisplayFor(modelItem => item.Patient.Name) @Html.DisplayFor(modelItem => item.Patient.LastName)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Doctor.Name) @Html.DisplayFor(modelItem => item.Doctor.LastName)</td>
-                                <td class="text-center">@Html.DisplayFor(modelItem => item.Date)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Reason)</td>
-                                <td class="text-center col-3">
-                                    <a asp-action="Consult" asp-route-id="@item.AppointmentId" class="btn btn-outline-warning col-6 mx-auto">Consultar</a>
+                                <td class="text-center col-2">@Html.DisplayFor(modelItem => item.Date)</td>
+                                <td class="col-3">@Html.DisplayFor(modelItem => item.Reason)</td>
+                                <td class="text-center col-4">
+                                    <a asp-action="Consult" asp-route-id="@item.AppointmentId" class="btn btn-outline-info col-6 mx-auto">Consultar</a>
                                     <a asp-action="Delete" asp-route-id="@item.AppointmentId" class="btn btn-outline-danger col-4 mx-auto">Eliminar</a>
                                 </td>
                             </tr>
@@ -83,8 +83,8 @@
                                 <!-- Datos de la cita para "Resultados" -->
                                 <td>@Html.DisplayFor(modelItem => item.Patient.Name) @Html.DisplayFor(modelItem => item.Patient.LastName)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Doctor.Name) @Html.DisplayFor(modelItem => item.Doctor.LastName)</td>
-                                <td class ="text-center">@Html.DisplayFor(modelItem => item.Date)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Reason)</td>
+                                <td class="text-center col-2">@Html.DisplayFor(modelItem => item.Date)</td>
+                                <td class="col-3">@Html.DisplayFor(modelItem => item.Reason)</td>
                                 <td class="text-center col-4">
                                     <a asp-action="Check" asp-route-id="@item.AppointmentId" class="btn btn-outline-info col-6 mx-auto">Consultar Resultados</a>
                                     <a asp-action="Delete" asp-route-id="@item.AppointmentId" class="btn btn-outline-danger col-4 mx-auto">Eliminar</a>
@@ -124,9 +124,9 @@
                                 <!-- Datos de la cita para "Completa" -->
                                 <td>@Html.DisplayFor(modelItem => item.Patient.Name) @Html.DisplayFor(modelItem => item.Patient.LastName)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Doctor.Name) @Html.DisplayFor(modelItem => item.Doctor.LastName)</td>
-                                <td class="text-center">@Html.DisplayFor(modelItem => item.Date)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Reason)</td>
-                                <td class="text-center col-3">
+                                <td class="text-center col-2">@Html.DisplayFor(modelItem => item.Date)</td>
+                                <td class="col-3">@Html.DisplayFor(modelItem => item.Reason)</td>
+                                <td class="text-center col-4">
                                     <a asp-action="Results" asp-route-id="@item.AppointmentId" class="btn btn-outline-info col-6 mx-auto">Ver Resultados</a>
                                     <a asp-action="Delete" asp-route-id="@item.AppointmentId" class="btn btn-outline-danger col-4 mx-auto">Eliminar</a>
                                 </td>

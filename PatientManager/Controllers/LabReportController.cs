@@ -19,7 +19,7 @@ namespace PatientManager.Controllers
 
         public async Task<IActionResult> Index()
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View(await _labReportService.GetWithAll());
@@ -27,7 +27,7 @@ namespace PatientManager.Controllers
 
         public async Task<ActionResult> Report(int id)
         {
-            if (!_validator.isAsistent())
+            if (!_validator.IsAsistent())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View(await _labReportService.GetById(id));
@@ -39,7 +39,7 @@ namespace PatientManager.Controllers
         {
             try
             {
-                if (!_validator.isAsistent())
+                if (!_validator.IsAsistent())
                     return RedirectToRoute(new { controller = "Home", action = "Index" });
 
                 await _labReportService.Update(vm, id);

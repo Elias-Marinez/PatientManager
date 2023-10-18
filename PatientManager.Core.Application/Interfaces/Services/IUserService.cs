@@ -10,5 +10,7 @@ namespace PatientManager.Core.Application.Interfaces.Services
                                                     User>
     {
         Task<UserViewModel> Login(LoginViewModel vm);
+        Task<bool> ExistsUsername(UserSaveViewModel vm);
+        Task<bool> ExistsUsername(UserUpdateViewModel vm);
     }
 }

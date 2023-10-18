@@ -23,7 +23,7 @@ namespace PatientManager.Controllers
         // GET: DoctorController
         public async Task<ActionResult> Index()
         {
-            if (!_validator.isAdmin())
+            if (!_validator.IsAdmin())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View(await _doctorService.Get());
@@ -32,7 +32,7 @@ namespace PatientManager.Controllers
         // GET: DoctorController/Create
         public ActionResult Create()
         {
-            if (!_validator.isAdmin())
+            if (!_validator.IsAdmin())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View();
@@ -43,7 +43,7 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(DoctorSaveViewModel vm)
         {
-            if (!_validator.isAdmin())
+            if (!_validator.IsAdmin())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             try
@@ -61,7 +61,7 @@ namespace PatientManager.Controllers
         // GET: DoctorController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            if (!_validator.isAdmin())
+            if (!_validator.IsAdmin())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View(await _doctorService.GetById(id));
@@ -72,7 +72,7 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, DoctorUpdateViewModel vm)
         {
-            if (!_validator.isAdmin())
+            if (!_validator.IsAdmin())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             try
@@ -92,7 +92,7 @@ namespace PatientManager.Controllers
         // GET: DoctorController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
-            if (!_validator.isAdmin())
+            if (!_validator.IsAdmin())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             return View(await _doctorService.GetById(id));
@@ -103,7 +103,7 @@ namespace PatientManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id, DoctorUpdateViewModel vm)
         {
-            if (!_validator.isAdmin())
+            if (!_validator.IsAdmin())
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             try

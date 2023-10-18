@@ -12,19 +12,19 @@ namespace PatientManager.Middlewares
         {
             _httpContextAccessor = httpContextAccessor;
         }
-        public bool isLogged()
+        public bool IsLogged()
         {
             UserViewModel vm = _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("user");
             return (vm != null);
         }
 
-        public bool isAdmin()
+        public bool IsAdmin()
         {
             UserViewModel vm = _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("user");
             return (vm != null && vm.UserType == "Administrador");
         }
 
-        public bool isAsistent()
+        public bool IsAsistent()
         {
             UserViewModel vm = _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("user");
             return (vm != null && vm.UserType == "Asistente");
